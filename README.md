@@ -199,4 +199,4 @@ All your test files are inside the **tests** folder.<b/>
 
 ## Collaborators:
     * Rivas Joselin [LinkedIn de Joselin](https://linkedin.com/in/joselin-rivas-3976b4254)
-    * Madueno Stefano [linkedIn de Stefano]()
+    * Madueno Stefano [linkedIn de Stefano](https://www.linkedin.com/in/stefano-berny-madue%C3%B1o-lau-8ba7b2202/)
