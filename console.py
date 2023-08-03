@@ -114,28 +114,31 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """ Create an object of any class"""
+                """ Create an object of any class"""
+        arg_split = args.split(" ")
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif arg_split[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        """ task 2 airbnb vol 2 """
-        arg_list = args.split()
-        new_instance = HBNBCommand.classes[arg_list[0]]()
-        for i in range(1, len(arg_list)):
-            s = arg_list[i].split('=')
-            if len(s) > 1:
-                if s[1][0] == '"':
-                    s[1] = s[1].replace('_', ' ')
-                    setattr(new_instance, s[0], s[1][1:-1])
-                elif '.' in s[1]:
-                    setattr(new_instance, s[0], float(s[1]))
-                else:
-                    setattr(new_instance, s[0], int(s[1]))
+        input_dict = {}
+        parameter_split = arg_split[1:]
+        for value in parameter_split:
+            parameter_key, parameter_value = value.split("=")
+            if (parameter_value[0] == '"'):
+                var_to_replace = parameter_value[1:-1].replace("_", " ")
+                input_dict[parameter_key] = var_to_replace
+            elif '.' in parameter_value:
+                parameter_value = float(parameter_value)
+                input_dict[parameter_key] = parameter_value
+            else:
+                parameter_value = int(parameter_value)
+                input_dict[parameter_key] = parameter_value
+        new_instance = HBNBCommand.classes[arg_split[0]]()
+        new_instance.__dict__.update(input_dict)
+        storage.new(new_instance)
         print(new_instance.id)
-        new_instance.save()
         storage.save()
 
     def help_create(self):
