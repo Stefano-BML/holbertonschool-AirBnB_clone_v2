@@ -122,6 +122,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         """ task 2 airbnb vol 2 """
+        arg_list = args.split()
         new_instance = HBNBCommand.classes[arg_list[0]]()
         for i in range(1, len(arg_list)):
             s = arg_list[i].split('=')
