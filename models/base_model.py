@@ -8,7 +8,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, ForeignKey, DateTime
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
-Base = declarative_base()
+if os.getenv("HBNB_TYPE_STORAGE") == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 class BaseModel:
     """A base class for all hbnb models"""
