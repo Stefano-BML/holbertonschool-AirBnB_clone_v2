@@ -5,6 +5,7 @@ from sqlalchemy import Column, Table, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from models.review import Review
+from models.amenity import Amenity
 import os
 
 
@@ -23,7 +24,8 @@ class Place(BaseModel, Base):
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
         reviews = relationship("Review", backref="place", cascade="all, delete")
-
+        amenities = relationship("Amenity", secondary="place_amenity", viewonly=True)
+   
     else:
         """ defines the attributes to be stored in the JSON """
         city_id = ''
@@ -46,3 +48,18 @@ class Place(BaseModel, Base):
                 if review.place_id == self.id:
                     reviewlist.append(review)
             return reviewlist
+
+        @property
+        def amenities(self):
+            """ Get Linked Amenities"""
+            amenitylist = []
+            for amenity in list(models.storage.all(Amenity).values()):
+                if amenity.id in self.amenity_ids:
+                    amenitylist.append(amenity)
+            return amenitylist
+            
+        @amenities.setter
+        def amenities(self, value):
+            """ Value help Amenities"""
+            if type(value) == Amenity:
+                self.amenity_ids.append(value.id)
