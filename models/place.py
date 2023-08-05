@@ -19,6 +19,7 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
+        reviews = relationship("Review", backref="place", cascade="delete")
 
     else:
         """ defines the attributes to be stored in the JSON """
