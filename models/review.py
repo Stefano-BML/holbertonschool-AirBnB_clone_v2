@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+import os
 
 class Review(BaseModel, Base):
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
