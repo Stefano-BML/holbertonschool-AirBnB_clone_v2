@@ -24,7 +24,7 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         places = relationship("Place", backref="user",
                           cascade='all, delete')
-        reviews = relationship("Review", backref="place", cascade="delete")
+        reviews = relationship("Review", backref="place", cascade="all, delete")
 
     else:
         """ defines the attributes to be stored in the JSON """
