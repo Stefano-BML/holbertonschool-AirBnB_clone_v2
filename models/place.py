@@ -32,7 +32,9 @@ class Place(BaseModel, Base):
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
         reviews = relationship("Review", backref="place", cascade="all, delete")
-        amenities = relationship("Amenity", secondary="place_amenity", viewonly=True)
+        amenities = relationship("Amenity", secondary="place_amenity",
+                                   back_populates="place_amenities", viewonly=False)
+
    
     else:
         """ defines the attributes to be stored in the JSON """
