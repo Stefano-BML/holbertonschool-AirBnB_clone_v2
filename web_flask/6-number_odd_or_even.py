@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-A Flask web application with routes to display greetings, custom messages, number validation, and HTML templates.
+A Flask web application
 """
 
 from flask import Flask, render_template_string
@@ -100,8 +100,8 @@ def number_odd_or_even(n):
     Returns:
         str: An HTML page displaying "Number: n is even|odd" using a template.
     """
-    return render_template('6-number_odd_or_even.html',
-                number=n, even_odd='even' if n % 2 == 0 else 'odd')
+    even_odd = 'even' if n % 2 == 0 else 'odd'
+    return render_template('6-number_odd_or_even.html', number=n, even_odd=even_odd)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
