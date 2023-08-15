@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-A Flask web application with routes to display greetings, custom messages, and number validation.
+A Flask web application with routes to display differents funtions
 """
 
 from flask import Flask
