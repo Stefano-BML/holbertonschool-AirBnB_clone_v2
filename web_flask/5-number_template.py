@@ -62,31 +62,19 @@ def python_message(text):
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def number_check(n):
-    """
-    Route handler for the '/number/<n>' route.
-
-    Args:
-        n (int): The integer value extracted from the URL.
-
-    Returns:
-        str: The message "{n} is a number".
-    """
-    return f"{n} is a number"
+def number_page(n):
+    """Displays '(Variable n) is a number'
+        upon visiting /number/(number) page
+        if n is really a number."""
+    return "{} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def number_template(n):
-    """
-    Route handler for the '/number_template/<n>' route.
+def number_template_page(n):
+    """Displays html page
+        if n is really a number."""
+    return render_template('5-number.html', n=n)
 
-    Args:
-        n (int): The integer value extracted from the URL.
-
-    Returns:
-        str: An HTML page displaying "Number: n" using a template.
-    """
-    return render_template('5-number.html', number=n)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
