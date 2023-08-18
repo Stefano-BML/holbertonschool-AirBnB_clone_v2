@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-A Flask web application with routes to display greetings, custom messages, number validation, and HTML templates.
+A Flask web application
 """
 
 from flask import Flask, render_template_string
@@ -90,4 +90,3 @@ def number_template(n):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
