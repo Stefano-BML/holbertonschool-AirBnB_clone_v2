@@ -30,3 +30,13 @@ class State(BaseModel, Base):
                 if getattr(value, 'state_id') == self.id:
                     query.append(value)
             return query
+
+    # Add the following @property method for DBStorage
+    @property
+    def cities(self):
+        """ Return a list of city instances with state_id = current """
+        from models import storage
+        all_cities = storage.all(City)
+        state_cities = [city for city in all_cities.values()
+                        if city.state_id == self.id]
+        return state_cities
