@@ -4,14 +4,14 @@ import json
 from json import dumps, loads
 from os.path import exists
 
+
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a dictionary of models currently in storage"""
-        
+        """Returns a dictionary of models currently in storage"""        
         dic = {}
         if cls:
             for key, value in FileStorage.__objects.items():
