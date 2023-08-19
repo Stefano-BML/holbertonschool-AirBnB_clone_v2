@@ -7,15 +7,6 @@ from sqlalchemy.orm import relationship
 import os
 import models
 
-association_table = Table("place_amenity", Base.metadata,
-                          Column("place_id", String(60),
-                                 ForeignKey("places.id"),
-                                 primary_key=True, nullable=False),
-                          Column("amenity_id", String(60),
-                                 ForeignKey("amenities.id"),
-                                 primary_key=True, nullable=False))
-
-
 class State(BaseModel, Base):
     """ State class """
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
@@ -39,13 +30,3 @@ class State(BaseModel, Base):
                 if getattr(value, 'state_id') == self.id:
                     query.append(value)
             return query
-
-    # Add the following @property method for DBStorage
-    @property
-    def cities(self):
-        """ Return a list of city instances with state_id = current """
-        from models import storage
-        all_cities = storage.all(City)
-        state_cities = [city for city in all_cities.values()
-                        if city.state_id == self.id]
-        return state_cities
