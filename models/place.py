@@ -8,15 +8,6 @@ from models.review import Review
 from models.amenity import Amenity
 import os
 
-association_table = Table("place_amenity", Base.metadata,
-                          Column("place_id", String(60),
-                                 ForeignKey("places.id"),
-                                 primary_key=True, nullable=False),
-                          Column("amenity_id", String(60),
-                                 ForeignKey("amenities.id"),
-                                 primary_key=True, nullable=False))
-
-
 class Place(BaseModel, Base):
     """ defines the attributes to be stored in the DB """
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
@@ -35,7 +26,14 @@ class Place(BaseModel, Base):
         amenities = relationship("Amenity", secondary="place_amenity",
                                    back_populates="place_amenities", viewonly=False)
 
-   
+        association_table = Table("place_amenity", Base.metadata,
+                                  Column("place_id", String(60),
+                                         ForeignKey("places.id"),
+                                         primary_key=True, nullable=False),
+                                  Column("amenity_id", String(60),
+                                         ForeignKey("amenities.id"),
+                                         primary_key=True, nullable=False))
+
     else:
         """ defines the attributes to be stored in the JSON """
         city_id = ''
