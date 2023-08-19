@@ -30,3 +30,12 @@ class State(BaseModel, Base):
                 if getattr(value, 'state_id') == self.id:
                     query.append(value)
             return query
+
+        # Add the public getter method cities
+        def cities(self):
+            """Return the list of City objects linked to the current State"""
+            city_list = []
+            for city in models.storage.all(City).values():
+                if city.state_id == self.id:
+                    city_list.append(city)
+            return city_list
